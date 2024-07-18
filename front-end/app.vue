@@ -13,10 +13,10 @@
             <NuxtLink to="/employers_list" class="text-white hover:underline">Ingreso</NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/" class="text-white hover:underline">Lista Empleados</NuxtLink>
+            <NuxtLink to="/agregar_empleado" class="text-white hover:underline">Agregar Empleado</NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/" class="text-white hover:underline">Contact</NuxtLink>
+            <NuxtLink to="/" class="text-white hover:underline">Ver Empleados</NuxtLink>
           </li>
         </ul>
       </nav>
