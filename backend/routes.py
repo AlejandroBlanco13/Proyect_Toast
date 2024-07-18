@@ -70,7 +70,37 @@ def registrar_entrada():
         
         cursor.close()
         return jsonify({"error": str(e)}), 500
-    
+
+
+
+@routes_bp.route('/marcar_salida', methods=['PUT'])
+def registrar_salida():
+    try:
+        cursor = db.cursor()
+        # Obtener datos de la solicitud JSON
+        data = request.get_json()
+        print("penesito",data)
+        cedula = str(data["cedula"])
+        fecha = str(data["fecha"])
+        hora_salida = str(data["hora_salida"])
+
+        print(cedula, fecha, hora_salida)
+        query = "UPDATE asistencia SET hora_salida = %s WHERE cedula = %s AND fecha = %s;"
+        values = (hora_salida, cedula, fecha)
+        cursor.execute(query, values)
+
+        db.commit()  # Hacer commit para guardar los cambios        
+        cursor.close()  # Cerrar el cursor después de hacer commit
+        return jsonify({"mensaje": "Salida registrada correctamente"}), 200
+    except Exception as e:
+        # Devolver el mensaje de error para facilitar la depuración
+        
+        db.rollback()
+        cursor.close()
+        return jsonify({"error": str(e)}), 500
+
+
+
 @routes_bp.route('/test', methods = ['POST'])
 def test():
     try:
