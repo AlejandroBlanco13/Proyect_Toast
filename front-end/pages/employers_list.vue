@@ -29,27 +29,22 @@ interface empleado {
   hora_salida: string
 }
 
-const imprimir = (row : empleado) => {
-  console.log('hola')
-  console.log(row)
-}
 
 const registrar_entrada = async() => {
   
-  const res = await fetch('http://localhost:5000/test', {
+  const res = await fetch('http://localhost:5000/registrar_entrada', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       cedula: '123456789',
-      fecha: '17/10/2021',
+      fecha: new Date().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }),
       hora_entrada: new Date().toLocaleTimeString(),
-      hora_salida: new Date().toLocaleTimeString()
     })
   })
-  
-
+  const data = await res.json()
+  console.log(data)
 }
 
 const obtener_empleados = async() => {
@@ -64,13 +59,25 @@ const obtener_empleados = async() => {
   } catch (error) {
     console.log(error)
   }
-    
-
 
 }
 
 
-
+const marcar_salida = async(row: empleado) => {
+  const res = await fetch('http://localhost:5000/marcar_salida', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      cedula: row.cedula,
+      fecha: new Date().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }),
+      hora_salida: new Date().toLocaleTimeString()
+    })
+  })
+  const data = await res.json()
+  console.log(data)
+}
 
 const cargando = ref(true)
 
@@ -90,7 +97,7 @@ onMounted(() => {
     </template>
 
     <template #marcar_salida-data="{ row }">
-      <UButton color="indigo" @click="imprimir(row)">Marcar</UButton>
+      <UButton color="indigo" @click="marcar_salida(row)">Marcar</UButton>
     </template>
   </UTable>
 
