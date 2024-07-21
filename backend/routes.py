@@ -25,7 +25,6 @@ def formato_fila(row):
         "nombre": nombre + " " + apellido1
     }
 
-
 @routes_bp.route('/consultar_empleados_hoy', methods=['GET'])
 def consultar_empleados_hoy():
     try:
