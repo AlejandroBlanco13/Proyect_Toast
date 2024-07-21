@@ -9,7 +9,7 @@ class Database:
             cls._instance = psycopg2.connect(
                 dbname="toast",
                 user="postgres",
-                password="a123",
+                password="Xiannyale1313.",
                 host="localhost"
             )
         return cls._instance
