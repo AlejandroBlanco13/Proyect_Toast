@@ -138,8 +138,24 @@ const registrar_entrada = async () => {
     errorCedula.value = 'red'
   }
 
-
 }
+
+function convertirFormatoHora24a12(hora24: string) {
+  // Divide la cadena de tiempo en horas, minutos y segundos
+  const [horas, minutos] = hora24.split(':');
+
+  // Convierte las horas a un número para hacer cálculos
+  let horasNumerico = parseInt(horas, 10);
+  const esPM = horasNumerico >= 12;
+
+  // Determina AM o PM y ajusta las horas al formato de 12 horas
+  const periodo = esPM ? 'PM' : 'AM';
+  horasNumerico = horasNumerico % 12 || 12; // Convierte 0 a 12 para medianoche
+
+  // Formatea y devuelve la nueva cadena de tiempo
+  return `${horasNumerico}:${minutos} ${periodo}`;
+}
+
 
 const obtener_empleados = async () => {
 
@@ -149,8 +165,10 @@ const obtener_empleados = async () => {
 
     data.forEach((empleado: empleado) => {
 
+      empleado.hora_entrada = convertirFormatoHora24a12(empleado.hora_entrada)
       if (empleado.hora_salida !== null) {
         empleado.class = 'bg-green-200 '
+        empleado.hora_salida = convertirFormatoHora24a12(empleado.hora_salida)
       }
       else {
         empleado.class = 'bg-red-200'
@@ -167,20 +185,18 @@ const obtener_empleados = async () => {
 }
 
 
-
+//http://localhost:5000/marcar_salida
 const marcar_salida = async (row: empleado) => {
 
   cargando.value = true
   console.log(row)
-  const res = await fetch('http://localhost:5000/marcar_salida', {
+  const res = await fetch('http://localhost:3000/api/marcarSalida', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       cedula: row.cedula,
-      fecha: new Date().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }),
-      hora_salida: new Date().toLocaleTimeString()
     })
   })
   const data = await res.json()
