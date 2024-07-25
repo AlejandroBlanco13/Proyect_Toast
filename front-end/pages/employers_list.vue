@@ -2,6 +2,8 @@
 
 import { ref } from 'vue'
 
+
+
 const tableConfig = {
   wrapper: 'relative overflow-x-auto bg-white border border-gray-300', // Fondo blanco y borde gris claro para el contenedor
   base: 'min-w-full table-fixed border-collapse', // Border-collapse para compartir bordes
@@ -80,7 +82,7 @@ const tableConfig = {
 const columns = [{
   key: 'cedula',
   label: 'Cedula'
-  }, {
+}, {
   key: 'nombre',
   label: 'Nombre'
 }, {
@@ -95,7 +97,7 @@ const columns = [{
 }]
 
 const empleados = ref<empleado[]>([
-  ]);
+]);
 
 interface empleado {
   cedula: number
@@ -106,17 +108,19 @@ interface empleado {
 }
 
 
-const registrar_entrada = async() => {
-  
-  const res = await fetch('http://localhost:5000/registrar_entrada', {
+
+//http://localhost:5000/registrar_entrada
+//http://localhost:3000/api/registrarEntrada
+
+const registrar_entrada = async () => {
+
+  const res = await fetch('http://localhost:3000/api/registrarEntrada', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      cedula: cedulaInput.value,
-      fecha: new Date().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }),
-      hora_entrada: new Date().toLocaleTimeString(),
+      cedula: cedulaInput.value
     })
   })
   const data = await res.json()
@@ -124,45 +128,47 @@ const registrar_entrada = async() => {
   if (!data.error) {
     await obtener_empleados()
     toast.add({
-      title: 'Bienvenido! '+ empleados.value[empleados.value.length - 1].nombre,
+      title: 'Bienvenido! ' + empleados.value[empleados.value.length - 1].nombre,
     })
     errorCedula.value = 'blue'
     isOpen.value = false
     cedulaInput.value = ''
   }
-  else{
+  else {
     errorCedula.value = 'red'
   }
-  
+
+
 }
 
-const obtener_empleados = async() => {
-  
-  try{
-    const res = await fetch('http://localhost:5000/consultar_empleados_hoy')
+const obtener_empleados = async () => {
+
+  try {
+    const res = await fetch('http://localhost:3000/api/empleadosHoy')
     const data = await res.json()
 
     data.forEach((empleado: empleado) => {
-      if (empleado.hora_salida !== 'En trabajo'){     
+
+      if (empleado.hora_salida !== null) {
         empleado.class = 'bg-green-200 '
       }
-      else{
+      else {
         empleado.class = 'bg-red-200'
+        empleado.hora_salida = 'En trabajo'
       }
     })
     empleados.value = data
     console.log(data)
     cargando.value = false
-    
+
   } catch (error) {
     console.log(error)
   }
-
 }
 
 
 
-const marcar_salida = async(row: empleado) => {
+const marcar_salida = async (row: empleado) => {
 
   cargando.value = true
   console.log(row)
@@ -198,8 +204,7 @@ onMounted(() => {
 
 <template>
   <UTable class="mt-10 mx-14" :rows="empleados" :columns="columns" :loading=cargando
-    :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Cargando...' }"
-    :ui = "tableConfig">
+    :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Cargando...' }" :ui="tableConfig">
     <template #name-data="{ _ }">
     </template>
 
@@ -238,4 +243,3 @@ onMounted(() => {
     </UModal>
   </div>
 </template>
-
