@@ -224,7 +224,7 @@ onMounted(() => {
           </div>
 
           <div class="mt-10">
-            <UFormGroup v-slot="{ error }" label="Email" :error="errorCedula === 'red' && 'Cédula no encontrada'">
+            <UFormGroup v-slot="{ error }" label="Cedula" :error="errorCedula === 'red' && 'Cédula no encontrada'">
               <UInput placeholder="Ej: 208490685" :color="errorCedula" id="cedula" v-model="cedulaInput"
                 :trailing-icon="error ? 'i-heroicons-exclamation-triangle-20-solid' : undefined" />
             </UFormGroup>
