@@ -9,6 +9,8 @@ Make sure to install the dependencies:
 ```bash
 # npm
 npm install
+also use npx prisma generate
+
 
 # pnpm
 pnpm install
