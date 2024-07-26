@@ -72,7 +72,7 @@ const tableConfig = {
     },
     emptyState: {
       icon: 'i-heroicons-circle-stack-20-solid',
-      label: 'No items.',
+      label: 'No hay empleados registrados actualmente',
     },
   },
 };
@@ -220,7 +220,8 @@ onMounted(() => {
 
 <template>
   <UTable class="mt-10 mx-14" :rows="empleados" :columns="columns" :loading=cargando
-    :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Cargando...' }" :ui="tableConfig">
+    :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Cargando...' }" :ui="tableConfig"
+    :empty-state="{ icon: 'i-heroicons-circle-stack-20-solid', label: 'No hay entradas registradas actualmente.' }">
     <template #name-data="{ _ }">
     </template>
 
