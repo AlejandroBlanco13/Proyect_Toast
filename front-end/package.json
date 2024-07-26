@@ -7,13 +7,19 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "start": "nuxt start"
   },
   "dependencies": {
     "@nuxt/ui": "^2.17.0",
     "@prisma/client": "^5.17.0",
     "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "nodemailer": "^6.9.14",
     "nuxt": "^3.12.3",
     "vue": "latest"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.15"
   }
 }

@@ -112,6 +112,19 @@ interface empleado {
 //http://localhost:5000/registrar_entrada
 //http://localhost:3000/api/registrarEntrada
 
+const test = async () => {
+  try {
+    const res = await fetch('http://localhost:3000/api/mandarExcelTest', {
+    })
+    const data = await res.json()
+    console.log(data)
+  }
+  catch (error) {
+    console.log("error :C", error)
+  }
+}
+
+
 const registrar_entrada = async () => {
 
   const res = await fetch('http://localhost:3000/api/registrarEntrada', {
@@ -254,6 +267,9 @@ onMounted(() => {
         </template>
         <div class="flex justify-center">
           <UButton label="Confirmar" color="blue" @click="registrar_entrada" />
+        </div>
+        <div class="flex justify-center">
+          <UButton label="Test" color="blue" @click="test" />
         </div>
 
       </UCard>
