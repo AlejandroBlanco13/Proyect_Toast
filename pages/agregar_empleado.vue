@@ -4,7 +4,7 @@ const value = ref('')
 
 <template>
   <div class="flex justify-center items-start min-h-screen mt-20"> <!-- Contenedor centrado con margen superior -->
-    <UFormGroup label="Formulario de Registro" hint="Opcional">
+    <UFormGroup label="Formulario de Registro" hint="Obligatorio">
       <div class="space-y-4"> <!-- Espacio entre los campos -->
         <div class="relative w-64">
           <input type="text" placeholder="Nombre" class="pl-10 border border-gray-900 rounded-md py-2 px-3 text-white bg-gray-900 focus:outline-none focus:shadow-outline w-full" />
@@ -45,6 +45,11 @@ const value = ref('')
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 18.364A4 4 0 117.464 16 3.975 3.975 0 015.12 18.364zM17 10.001v5.042a2.986 2.986 0 01-.879 2.121 2.986 2.986 0 01-2.121.879H6.121a2.986 2.986 0 01-2.121-.879A2.986 2.986 0 013.121 15V10a2.986 2.986 0 01.879-2.121A2.986 2.986 0 016.121 7h8.879a2.986 2.986 0 012.121.879A2.986 2.986 0 0117 10z" />
             </svg>
           </div>
+        </div>
+        <div class="relative w-64 mt-6"> <!-- Botón con margen superior -->
+          <button class="border border-gray-900 rounded-md py-2 px-3 text-white bg-gray-900 focus:outline-none focus:shadow-outline w-full hover:bg-gray-700">
+            Agregar Empleado
+          </button>
         </div>
       </div>
     </UFormGroup>
