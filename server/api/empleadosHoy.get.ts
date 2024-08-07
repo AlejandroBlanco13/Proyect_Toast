@@ -11,7 +11,6 @@ interface EmpleadoToString {
   hora_salida: string;
 }
 
-let empleadosToStringHoy: EmpleadoToString[] = [];
 
 const horaej = "1970-01-01T21:00:00.000Z";
 //console.log(horaej.split("T")[1].split(".")[0]);

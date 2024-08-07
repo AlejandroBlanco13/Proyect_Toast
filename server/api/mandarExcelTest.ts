@@ -18,10 +18,10 @@ export default defineEventHandler(async () => {
   // Configura los detalles del correo
   const mailOptions = {
     from: process.env.correo, // Reemplaza con tu correo
-    to: "noni45100@hotmail.com", // Reemplaza con el correo del destinatario
+    to: "anthonyjimenezzamora@gmail.com", // Reemplaza con el correo del destinatario
     subject: "Tilines insanos",
-    text: "Contenido del correo en texto plano",
-    html: "<p>Contenido del correo en HTML</p>", // Opcional: contenido en HTML
+    text: "Hola, soy el principe de Nigeria", // Opcional: contenido en texto plano
+    html: "<p>Contenido del correo en HTML </p>", // Opcional: contenido en HTML
   };
 
   try {
