@@ -16,7 +16,7 @@
             <NuxtLink to="/agregar_empleado" class="text-white hover:underline">Agregar Empleado</NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/" class="text-white hover:underline">Ver Empleados</NuxtLink>
+            <NuxtLink to="/ver_empleados" class="text-white hover:underline">Ver Empleados</NuxtLink>
           </li>
         </ul>
       </nav>
